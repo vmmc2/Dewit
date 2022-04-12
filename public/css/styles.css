@@ -2,6 +2,15 @@
     font-family: 'Lexend', sans-serif;
 }
 
+.my-accordion{
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.my-form{
+    margin:0 auto;
+}
+
 #greeting{
     text-align: center;
 }

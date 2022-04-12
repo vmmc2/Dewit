@@ -16,7 +16,7 @@
             <h1> Hello There! Today is: <%= currentDay %> </h1>
         </div>
 
-        <div class="font-lexend accordion mt-4 mb-4" id="accordionExample">
+        <div class="font-lexend accordion mt-4 mb-4 my-accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -25,11 +25,23 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
                     <div class="accordion-body">
-                        <ul class="taskList">
-                            <li> Task 1 </li>
-                            <li> Task 2</li>
-                            <li> Task 3</li>
-                        </ul>
+                        <div class="taskList">
+                            <div class="taskItem">
+                                <div class="taskDescription"></div>
+                                    <p> Task 1 description </p>
+                                <div class="taskStatus">
+                                    <a class="taskDeleted">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </a>
+                                    <a class="taskPaused">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="yellow" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                    </a>
+                                    <a class="taskDone" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,7 +63,7 @@
             </div>
         </div>
 
-
+        <!--
         <ul>
             <li> Task 1 </li>
             <li> Task 2</li>
@@ -60,9 +72,11 @@
                    <li> <%= tasks[i] %> </li>
             <% } %>
         </ul>
+        -->
 
-        <form class="font-lexend" action="/" method="POST">
+        <form class="font-lexend my-form" action="/" method="POST">
             <input type="text" name="newTask" placeholder="Insert new task" autocomplete="off">
+            <input type="text" name="newGroup" placeholder="Insert the task group" autocomplete="off">
             <button type="submit" name="addTask"> Add Task </button>
         </form>
 
