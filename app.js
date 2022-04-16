@@ -65,7 +65,7 @@ const defaultTaskGroup = new TaskGroup({
 
 defaultTaskGroup.save();*/
 
-
+/* ----------------------------- Back-End Logic ------------------------------ */
 app.listen(3000, function(){
     console.log("The server is running on port 3000!");
 });
@@ -94,11 +94,11 @@ app.post("/", function(req, res){
         taskGroupName = "General";
     }
 
-    TaskGroup.exists({name: taskGroupName}, function(err, result){
+    TaskGroup.findOne({name: taskGroupName}, function(err, result){
         if(err){
             console.log(err);
         }else{
-            if(result === null){ // TaskGroup nao existe
+            if(result === null){ // TaskGroup nao existe.
                 const taskItem = new TaskItem({
                     name: newTask
                 });
@@ -108,8 +108,13 @@ app.post("/", function(req, res){
                     tasks: [taskItem]
                 });
                 taskGroupItem.save();
-            }else{ // TaskGroup ja existe
-                
+            }else{ // TaskGroup existe.
+                const taskItem = new TaskItem({
+                    name: newTask
+                });
+                taskItem.save();
+                result.tasks.push(taskItem);
+                result.save();
             }
         }
     });

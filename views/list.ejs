@@ -29,17 +29,17 @@
                             <div class="accordion-body">
                                 <div class="taskList">
                                     <% for(let j = 0; j < taskGroups[i].tasks.length; j++){ %>
-                                        <div class="taskItem px-2 py-2 rounded">
+                                        <div class="taskItem px-2 py-2 my-2 rounded">
                                             <div class="taskDescription">
                                                 <p class="task-text"> <%= taskGroups[i].tasks[j].name %> </p>
                                             </div>
                                             <div class="taskStatus">
-                                                <button type="button" class="btn btn-outline-danger ml-1">
-                                                    <a class="taskDeleted">
+                                                <button type="button" class="delete-button btn btn-outline-danger ml-1">
+                                                    <a class="taskDeleted" href="#">
                                                         <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                                     </a>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-success ml-1">
+                                                <button type="button" class="finish-button btn btn-outline-success ml-1">
                                                     <a class="taskDone" href="#">
                                                         <svg class="done-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                                     </a>

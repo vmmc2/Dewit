@@ -17,6 +17,14 @@
     padding: 0px;
 }
 
+.taskDeleted{
+    width: 120%;
+}
+
+.taskDone{
+    width: 120%;
+}
+
 .delete-icon:hover{
     stroke: white;
 }
