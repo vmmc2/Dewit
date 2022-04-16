@@ -66,9 +66,6 @@ const defaultTaskGroup = new TaskGroup({
 defaultTaskGroup.save();*/
 
 
-
-
-
 app.listen(3000, function(){
     console.log("The server is running on port 3000!");
 });
@@ -86,20 +83,36 @@ app.get("/", function(req, res){
 
     TaskGroup.find({}, function(err, foundItems){
         taskGroups = foundItems;
-        //console.log("The sent taskGroups is: " + taskGroups);
         res.render("list", {currentDay: currentDay, taskGroups: taskGroups});
     });
 });
 
 app.post("/", function(req, res){
-    var newTask = req.body.newTask;
-    var taskGroup = req.body.taskGroup;
-    
-    if(!tasks.hasOwnProperty(taskGroup)){
-        tasks[taskGroup] = [newTask];
-    }else{
-        tasks[taskGroup].push(newTask);
+    let newTask = req.body.newTask;
+    let taskGroupName = req.body.taskGroup;
+    if(taskGroupName === ""){
+        taskGroupName = "General";
     }
+
+    TaskGroup.exists({name: taskGroupName}, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            if(result === null){ // TaskGroup nao existe
+                const taskItem = new TaskItem({
+                    name: newTask
+                });
+                taskItem.save();
+                const taskGroupItem = new TaskGroup({
+                    name: taskGroupName,
+                    tasks: [taskItem]
+                });
+                taskGroupItem.save();
+            }else{ // TaskGroup ja existe
+                
+            }
+        }
+    });
 
     res.redirect("/");
 });

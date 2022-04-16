@@ -16,8 +16,6 @@
             <h1> Hello There! Today is: <%= currentDay %> </h1>
         </div>
 
-        <% console.log("The received taskGroups is: " + taskGroups) %>
-
         <% if(Object.getOwnPropertyNames(taskGroups).length !== 0){ %>
             <div class="font-lexend accordion mt-4 mb-4 my-accordion" id="accordionExample">
                 <% for(let i = 0; i < taskGroups.length; i++){ %>

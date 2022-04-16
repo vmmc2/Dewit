@@ -44,6 +44,10 @@
     box-shadow: 5px 5px 5px #CDD1DE;
 }
 
+.taskDescription{
+    max-width: 75%;
+}
+
 .task-text{
     margin-top: 5px;
     margin-bottom: 5px;
