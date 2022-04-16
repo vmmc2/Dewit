@@ -16,30 +16,32 @@
             <h1> Hello There! Today is: <%= currentDay %> </h1>
         </div>
 
-        <% if(Object.getOwnPropertyNames(tasks).length !== 0){ %>
+        <% console.log("The received taskGroups is: " + taskGroups) %>
+
+        <% if(Object.getOwnPropertyNames(taskGroups).length !== 0){ %>
             <div class="font-lexend accordion mt-4 mb-4 my-accordion" id="accordionExample">
-                <% for(var taskGroup in tasks){ %>
+                <% for(let i = 0; i < taskGroups.length; i++){ %>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="<% taskGroup %>">
+                        <h2 class="accordion-header" id="">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <%= taskGroup %>
+                                <%= taskGroups[i].name %>
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show">
                             <div class="accordion-body">
                                 <div class="taskList">
-                                    <% for(let i = 0; i < tasks[taskGroup].length; i++){ %>
+                                    <% for(let j = 0; j < taskGroups[i].tasks.length; j++){ %>
                                         <div class="taskItem px-2 py-2 rounded">
                                             <div class="taskDescription">
-                                                <p class="task-text"> <%= tasks[taskGroup][i] %> </p>
+                                                <p class="task-text"> <%= taskGroups[i].tasks[j].name %> </p>
                                             </div>
                                             <div class="taskStatus">
-                                                <button type="button" class="btn btn-outline-danger mx-1">
+                                                <button type="button" class="btn btn-outline-danger ml-1">
                                                     <a class="taskDeleted">
                                                         <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                                                     </a>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-success mx-1">
+                                                <button type="button" class="btn btn-outline-success ml-1">
                                                     <a class="taskDone" href="#">
                                                         <svg class="done-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                                     </a>
