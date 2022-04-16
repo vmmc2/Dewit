@@ -16,77 +16,50 @@
             <h1> Hello There! Today is: <%= currentDay %> </h1>
         </div>
 
-        <div class="font-lexend accordion mt-4 mb-4 my-accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Accordion Item #1
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-                    <div class="accordion-body">
-                        <div class="taskList">
-                            <div class="taskItem px-2 py-2 rounded">
-                                <div class="taskDescription">
-                                    <p class="task-text"> Terminar de fazer o relatorio de Lab de Circuitos. </p>
-                                </div>
-                                <div class="taskStatus">
-                                    <button type="button" class="btn btn-outline-danger mx-1">
-                                        <a class="taskDeleted">
-                                            <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                        </a>
-                                    </button>
-                                    <!--
-                                    <a class="taskPaused">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="yellow" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-                                    </a>
-                                    -->
-                                    <button type="button" class="btn btn-outline-success mx-1">
-                                        <a class="taskDone" href="#">
-                                            <svg class="done-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                        </a>
-                                    </button>
+        <% if(Object.getOwnPropertyNames(tasks).length !== 0){ %>
+            <div class="font-lexend accordion mt-4 mb-4 my-accordion" id="accordionExample">
+                <% for(var taskGroup in tasks){ %>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="<% taskGroup %>">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <%= taskGroup %>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <div class="taskList">
+                                    <% for(let i = 0; i < tasks[taskGroup].length; i++){ %>
+                                        <div class="taskItem px-2 py-2 rounded">
+                                            <div class="taskDescription">
+                                                <p class="task-text"> <%= tasks[taskGroup][i] %> </p>
+                                            </div>
+                                            <div class="taskStatus">
+                                                <button type="button" class="btn btn-outline-danger mx-1">
+                                                    <a class="taskDeleted">
+                                                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    </a>
+                                                </button>
+                                                <button type="button" class="btn btn-outline-success mx-1">
+                                                    <a class="taskDone" href="#">
+                                                        <svg class="done-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <% } %>
             </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Accordion Item #2
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
-                    <div class="accordion-body">
-                        <ul class="taskList">
-                            <li> Task 1 </li>
-                            <li> Task 2</li>
-                            <li> Task 3</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--
-        <ul>
-            <li> Task 1 </li>
-            <li> Task 2</li>
-            <li> Task 3</li>
-            <% for(var i = 0; i < tasks.length; i++){ %>
-                   <li> <%= tasks[i] %> </li>
-            <% } %>
-        </ul>
-        -->
+        <% } %>
 
         <form class="font-lexend my-form rounded" action="/" method="POST">
             <input class="form-control new-task-input mx-2" type="text" name="newTask" placeholder="Insert the new task" autocomplete="off">
-            <input class="form-control new-group-input mx-2" type="text" name="newGroup" placeholder="Insert the task group" autocomplete="off">
+            <input class="form-control new-group-input mx-2" type="text" name="taskGroup" placeholder="Insert the task group" autocomplete="on">
             <button class="btn btn-outline-primary add-task-button mx-2" type="submit" name="addTask"> + </button>
         </form>
-
 
         <!-- Bootstrap JavaScript (Bootstrap Bundle with Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
