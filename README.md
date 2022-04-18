@@ -11,4 +11,3 @@
 
 ## Why its name is "DewIt"?
 * Well, it's just a quote from a famous Star Wars character (If you know, you know...)
-* ![(https://tenor.com/view/palpatine-dewit-gif-11426456)]
