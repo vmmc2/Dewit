@@ -55,16 +55,6 @@ const defaultTaskGroup = new TaskGroup({
     tasks: defaultTaskItems
 });
 
-/*TaskItem.insertMany(defaultTaskItems, function(err){
-    if(err){
-        console.log(err);
-    }else{
-        console.log("Successfully inserted the default docume")
-    }
-});
-
-defaultTaskGroup.save();*/
-
 /* ----------------------------- Back-End Logic ------------------------------ */
 app.listen(3000, function(){
     console.log("The server is running on port 3000!");
@@ -123,5 +113,27 @@ app.post("/", function(req, res){
 });
 
 app.post("/delete", function(req, res){
-    console.log(req.body);
+    let requestObj = req.body;
+    let requestString = "";
+
+    requestString = requestObj["FinishTask"];
+    let requestArray = requestString.split(" # ");
+    let taskGroupID = requestArray[0];
+    let taskItemID = requestArray[1];
+    TaskItem.findByIdAndDelete(taskItemID, function(err){
+        if(!err){
+            console.log("Successfully deleted the TaskItem.");
+            TaskGroup.findByIdAndUpdate(taskGroupID, {$pull: {tasks: {_id: taskItemID}}}, function(err, result){
+                if(!err){
+                    TaskGroup.deleteMany({tasks: []}, function(err){
+                        if(!err){
+                            console.log("Deleted empty TaskGroups.");
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    res.redirect("/");
 });
