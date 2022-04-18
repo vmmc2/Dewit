@@ -121,3 +121,7 @@ app.post("/", function(req, res){
 
     res.redirect("/");
 });
+
+app.post("/delete", function(req, res){
+    console.log(req.body);
+});
